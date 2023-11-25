@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <title>Users liste</title>
+</head>
+<body>
+    <h1>Users List</h1>
+    <ul>
+        <% users.forEach(user => { %>
+            <li>
+                <h5>cin: <%= user.cin %></h5>
+                <p>name:<%= user.name %></p>
+                <p>Email: <%= user.email %></p>
+                <button onclick="editUser(<%= user.cin %>)">Edit</button>
+                <button onclick="deleteUser(<%= user.cin %>)">Delete</button>
+            </li>
+        <% }); %>
+    </ul>
+
+
+<script>
+    function deleteUser(cin) {
+            
+        $.ajax({
+            url: `/users/${cin}`,
+            type: 'DELETE',
+            success: function(data) {
+                console.log('User deleted successfully:', data);
+                
+                window.location.reload(); 
+            },
+            error: function(error) {
+                console.error('Error deleting user:', error);
+              
+            }
+        });}
+        </script>
+</body>
+</html>

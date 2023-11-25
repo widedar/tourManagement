@@ -1,0 +1,46 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+</head>
+<body>
+  <h1>List of Reservations</h1>
+
+  <% if (reservations && reservations.length > 0) { %>
+    <ul>
+      <% reservations.forEach(reservation => { %>
+        <li>
+          <p>User Name: <%= reservation.user.name %></p>
+          <p>User Cin: <%= reservation.user.cin %></p>
+          <p>Flight Number: <%= reservation.vol.volNumber %></p>
+          <p>Departure Destination: <%= reservation.vol.destination.aller %></p>
+          <p>Arrival Destination: <%= reservation.vol.destination.arriver %></p>
+          <p>Reservation Number: <%= reservation.reservationNumber %></p>
+          <button onclick="deletereservation('<%= reservation.reservationNumber %>')">Delete</button>
+        </li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>No reservations available</p>
+  <% } %>
+
+
+  <script>
+    function deletereservation(reservationNumber) {
+        $.ajax({
+            url: `reservations/${reservationNumber}`,
+            type: 'DELETE',
+            success: function(data) {
+                console.log(`deleted successfully:`, data);
+                window.location.reload();
+            },
+            error: function(error) {
+                console.error(`Error deleting :`, error);
+            }
+        });
+    };
+    </script>
+</body>
+</html>

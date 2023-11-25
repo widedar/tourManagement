@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <title>List of Flights</title>
+</head>
+<body>
+  <h1>List des Vol</h1>
+
+  <% if (vols && vols.length > 0) { %>
+    <ul>
+      <% vols.forEach(vol => { %>
+        <li>
+          <p>Flight Number: <%= vol.volNumber %></p>
+          <p>Departure Date: <%= vol.datedepart %></p>
+          <p>Return Date: <%= vol.dateretour %></p>
+          <p>Class: <%= vol.classe %></p>
+          <p>Departure Destination: <%= vol.destination.aller %></p>
+          <p>Arrival Destination: <%= vol.destination.arriver %></p>
+          <button onclick="deletevol('<%= vol._id %>')">Delete</button>
+        </li>
+      <% }); %>
+    </ul>
+  <% } else { %>
+    <p>No flights available</p>
+  <% } %>
+
+
+
+  <script>
+    function deletevol(id) {
+        $.ajax({
+            url: `vols/${id}`,
+            type: 'DELETE',
+            success: function(data) {
+                console.log(`deleted successfully:`, data);
+                window.location.reload();
+            },
+            error: function(error) {
+                console.error(`Error deleting :`, error);
+            }
+        });
+    }
+</script>
+</body>
+</html>

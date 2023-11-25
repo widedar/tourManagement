@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Vol</title>
+</head>
+<body>
+  <h1>Ajouter Vol</h1>
+  <form action="/vols" method="post">
+    <label for="volNumber">Numero de Vol:</label>
+    <input type="text" id="volNumber" name="volNumber" required>
+
+    <label for="datedepart">Departure Date:</label>
+    <input type="date" id="datedepart" name="datedepart" required>
+
+    <label for="dateretour">Return Date:</label>
+    <input type="date" id="dateretour" name="dateretour" required>
+
+    <label for="classSelect">Select Class:</label>
+  <select name="classe" id="classSelect">
+    <option value="business">Business Class</option>
+    <option value="first">First Class</option>
+    <option value="economic">Economic Class</option>
+  </select>
+
+    <label for="aller">Destination d'aller:</label>
+    <input type="text" id="aller" name="aller" required>
+
+    <label for="arriver">Destination d'arriver</label>
+    <input id="arriver" name="arriver"  required>
+
+    <button type="submit">Create Vol</button>
+  </form>
+</body>
+</html>
